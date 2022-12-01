@@ -1,0 +1,26 @@
+import java.util.*;
+import java.text.*;
+public class salespersonsalary {
+
+	public final static double COMMISSION_RATE = 0.15;
+	public final static int SENTINEL = -1;
+	public final static String Line = "------------------------------------"; 
+	public static int sales = 0;
+	public static NumberFormat f1 = NumberFormat.getCurrencyInstance();
+	public static Scanner scan = new Scanner(System.in);
+	
+	public static void main(String[] args) {
+		
+		while (sales != SENTINEL) {
+			System.out.print("Enter sales in dollars (or -1 to end): \n");
+			sales = scan.nextInt();
+			if (sales == SENTINEL) break;
+			System.out.print("Salary is : " + f1.format( 1000+sales*COMMISSION_RATE ) );
+			System.out.println();
+			System.out.println(Line+"\n"+Line);
+			
+		}
+		System.out.print(Line+"\nbye");
+	}
+
+}
