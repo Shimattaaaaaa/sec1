@@ -1,4 +1,4 @@
 Student ID : 2213111038
 full name : Nonthakorn Prateepratana
 Aka : Non
-ClassDetail : String and Math Methods
+ClassDetail : Method and Overloading Method
