@@ -1,0 +1,5 @@
+   Date : 22-12-2022
+   StudentID: 2213111038
+   Fullname: Nonthakorn prateepratana
+   AKA : Non
+   ClassDetail: class and object
