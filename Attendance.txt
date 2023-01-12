@@ -2,4 +2,4 @@
    StudentID: 2213111038
    Fullname: Nonthakorn prateepratana
    AKA : Non
-   ClassDetail: class and object
+   ClassDetail: GUI
