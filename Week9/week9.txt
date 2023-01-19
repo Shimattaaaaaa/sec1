@@ -1,0 +1,244 @@
+public class WeeklyWeatherDataLauncher {
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		double[] rain = { 5.34, 2.34, 0.0, 0.0, 3.23, 0.0, 2.42 };
+		double[] pressure = { 99.3, 95.34, 101.3, 98.42, 103.4, 100.0, 102.87 };
+
+		WeeklyWeatherData wd = new WeeklyWeatherData();
+		wd.setData(rain,pressure);
+		wd.calculateStats();
+
+		System.out.println("Maximum Rainfall: "+ wd.getMaxRain());
+		//System.out.println("Average Rainfall: "+ wd.getAvgRain());
+		System.out.printf("Average Rainfall: %.2f",wd.getAvgRain());
+	}
+}
+
+
+
+public class WeeklyWeatherData {
+	// attributes
+	static int NUMDAYS = 7;
+	private double[] rainFall = new double[NUMDAYS];
+	private double[] avgPressure = new double[NUMDAYS];
+	private double avgRain;
+	private double maxRain;
+
+	// setter methods
+	public void setData(double[] rain, double[] pressure) {
+		rainFall = rain;
+		avgPressure = pressure;
+	}
+
+	public void calculateStats() {
+		maxRain = 0.0;
+		double rainSum = 0.0;
+		for (int i = 0; i < rainFall.length; i++) {
+			if(rainFall[i] >= maxRain) {
+				maxRain = rainFall[i];				
+			} //end of if
+			rainSum += rainFall[i];
+		}//end of for
+		avgRain = rainSum / NUMDAYS;
+	}//end of caculateStats()
+
+	//getter methods
+	public double getAvgRain() {
+		return avgRain;
+	}	
+	public double getMaxRain() {
+		return maxRain;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public class time {
+	//attributes
+	private int second;
+	private int minute;
+	private int hour;
+
+	//Constructor method
+	public time() {  //default constructor
+		this.second=0;
+		this.minute = 0;
+		this.hour = 0;
+	}
+	//Constructor with parameter
+	public time(int second,int minute,int hour) { 
+		this.second = second;
+		this.minute = minute;
+		this.hour = hour;
+	}
+
+	//The public getters/setters for the private variables.
+	public int getHour() {
+		return this.hour;
+	}
+	public int getMinute() {
+		return this.minute;
+	}
+	public int getSecond() {
+		return this.second;
+	}
+
+	public void setHour(int hour) {
+		this.hour = hour;		
+	}
+	public void setMinute(int minute) {
+		this.minute = minute;
+	}
+	public void setSecond(int second) {
+		this.second = second;
+	}
+
+	//toString method in the form of "hh:mm:ss" with leading zeros
+	public String toString() {
+		//use built-in function String.format() 
+		return String.format("%02d:%02d:%02d",hour,minute,second);
+	}
+
+	public void setTime(int second,int minute,int hour) {
+		this.second = second;
+		this.minute = minute;
+		this.hour = hour;
+	}
+
+	//Advances this Time instance by one second
+	public time nextSecond() {
+		++second;
+		if(second>=60) {
+			second = 0;
+			++minute;
+			if(minute>=60) {
+				minute = 0;
+				++hour;
+				if(hour>=24) {
+					hour=0;
+				} //end if hour
+			} //end if minute
+		}//end if second
+
+		//Return "this" instance, to support chaining operations
+		//e.g.,t1.nextSecond().nextSecond()
+		return this; 	
+	}
+}
+
+
+
+
+public class testtime {
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		time t1 = new time(1,2,3);
+		System.out.println(t1); //call toString() method
+
+		time t2 = new time(); //call default constructor
+		System.out.println(t2);
+
+		//Test Setters and Getters
+		t1.setHour(4);
+		t1.setMinute(5);
+		t1.setSecond(6);
+		System.out.println(t1); 
+
+		System.out.println("\nHour is:"+t1.getHour()+" hr.");
+		System.out.println("Minute is:"+t1.getMinute()+" min.");
+		System.out.println("Second is:"+t1.getSecond()+" sec.");
+
+		//Test setTime()
+		t1.setTime(58,59,23);
+		System.out.println("\n"+t1); 
+
+		//Test nextSecond() and chaining
+		System.out.println(t1.nextSecond());
+		//23:59:59
+		System.out.println(t1.nextSecond().nextSecond().nextSecond());
+		//00:00:02
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+import java.time.Year;
+
+public class Book {
+	private String title;
+	private float price;
+	private int publishyear;
+	
+	public void setTitle (String title) {
+		this.title = title;
+	}
+	public String gettitle() {
+		return title;
+	}
+	public void setPrice (float price) {
+		this.price  = price;
+	}
+	public float getPrice () {
+		return price;
+	}
+	public void setPublishyear(int year) {
+		publishyear = year;
+	}
+	public int getPublishyear() {
+		return publishyear;
+	}
+	
+	
+	public int getTotalYear() {
+		return Year.now().getValue() - publishyear;
+	}
+
+	public String toString() {//**********งง*****
+		return "Title : "+ title + " published for " + getTotalYear() + " year (" + price + " baht).";
+	}
+}
+
+
+
+import java.util.Scanner;
+
+public class BookDemo {
+	
+	public static Scanner scan = new Scanner(System.in); 
+	public static void main(String[] args) {
+		Book book = new Book();
+		
+		System.out.print("Input book title  : ");
+		book.setTitle(scan.nextLine());
+		System.out.print("Input book price  : ");
+		book.setPrice(scan.nextFloat());
+		System.out.print("Input publish year: ");
+		book.setPublishyear(scan.nextInt());
+		
+		System.out.println();
+		System.out.println(book);
+		
+	}
+
+}
