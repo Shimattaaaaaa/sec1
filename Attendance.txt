@@ -1,5 +1,5 @@
-Date : 19-1-2023
+Date : 26-1-2023
 StudentID: 2213111038
 Fullname: Nonthakorn prateepratana
 AKA : Non
-ClassDetail: Encapsulation
+ClassDetail: Composition, Inheritance, and Polymorphism
