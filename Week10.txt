@@ -1,0 +1,559 @@
+------------------------------------------------------------------------------------------
+public class TestStudent {
+
+	public static void main(String[] args) {
+
+		// Test constructor and toString()
+		Student anupap = new Student("Anupap Jaising", "I Happy Ave");
+		System.out.println(anupap); // toString()
+
+		System.out.println();
+		// Test Setters and Getters
+		anupap.setAddress("25 Pattanakarn");
+		System.out.println(anupap); // toString()
+		System.out.println(anupap.getName());
+		System.out.println(anupap.getAddress());
+
+		System.out.println();
+		// Test addCourse(),printGrades() and getAverageGrades()
+		anupap.addCourseGrade("INT107", 87);
+		anupap.addCourseGrade("INT108", 81);
+		anupap.addCourseGrade("MSC-202", 92);
+		anupap.printGrades();
+
+		System.out.printf("The average grade is %.3f%n", anupap.getAverage());
+
+	}
+
+}
+
+
+
+
+
+public class Student {
+
+	// private instance variables
+	private String name;
+	private String address;
+	// The course taken and grade for the courses are kept in 2 parallel arrays
+	private String courses[];
+	private int grades[]; // valid range is [0,100]
+	private int numCourses; // number of courses taken so far
+	// Maximum number of courses taken by student
+	private static final int MAX_COURSE = 30;
+
+	// Constructs a Student instance with give input
+	public Student(String name, String address) {
+		this.name = name;
+		this.address = address;
+		courses = new String[MAX_COURSE];
+		grades = new int[MAX_COURSE];
+		numCourses = 0;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public String getAddress() {
+		return this.address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String toString() {
+		return name + "(" + address + ")";
+	}
+
+	// Add a Courses and Grade
+	public void addCourseGrade(String course, int grade) {
+		courses[numCourses] = course;
+		grades[numCourses] = grade;
+		++numCourses;
+	}
+
+	// Prints all courses and their grade
+	public void printGrades() {
+		System.out.print(name);
+		for (int i = 0; i < numCourses; i++) {
+			System.out.print(" " + courses[i] + ":" + grades[i]);
+		}
+		System.out.println();
+	}
+
+	// Computes the average
+	public double getAverage() {
+		int sum = 0;
+		for (int _grades : grades) {
+			sum += _grades;
+		}
+		return (double) sum / numCourses;
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------------------------------------
+
+
+public class Author {
+
+	private String name;
+	private String email;
+
+	public Author(String name,String email) {
+		this.name = name;
+		this.email = email;
+		//this(name,email);
+	}
+
+	public Author() {
+		this.name = "";
+		this.email = "";
+		//this("","");
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getEmail() {
+		return this.email;
+	}
+
+	public String toString() {
+		return name+"("+email+")";
+	}
+
+}
+
+
+public class Book {
+
+	private String title;
+	private Author author;
+	private int page;
+
+	public Book(String title,Author author, int page) {
+		this.title = title;
+		this.author = author;
+		this.page = page;
+	}
+
+	public Book(String title,Author author) {
+		this.title = title;
+		this.author = author;
+		this.page = 0;
+	}
+
+	public Book() {
+		this.title = "";
+		this.author = new Author();
+		this.page = 0;
+	}
+
+	public String getTitle() {
+		return this.title;
+	}
+
+	public Author getAuthor() {
+		return this.author;
+	}
+
+	public void setPage(int page) {
+		this.page = page;
+	}
+
+	public int getPage() {
+		return this.page;
+	}
+
+	public String toString() {
+		return title+" has "+page+" pages write by "+author;
+	}
+
+}
+
+
+
+
+import java.util.Scanner;
+
+public class BookDemo {
+
+	public static void main(String[] args) {
+
+		Scanner scan = new Scanner(System.in);
+		System.out.print("Input author name   : ");
+		String Aname = scan.nextLine();
+		System.out.print("Input author e-mail : ");
+		String Aemail = scan.nextLine();
+
+		System.out.println();
+		System.out.print("Input book title : ");
+		String title = scan.nextLine();
+		System.out.print("Input book page  : ");
+		int page = scan.nextInt();
+
+		System.out.println();
+		Author Lee = new Author(Aname,Aemail);
+		Book book = new Book(title,Lee,page);
+		System.out.print(book);
+
+	}
+
+}
+
+
+
+
+
+------------------------------------------------------------------------------------------
+
+
+public class Date {
+
+	// If Attribute-Name and Parameter-Name == No need to use this. !!!
+
+	private int dMonth;
+	private int dDay;
+	private int dYear;
+
+	//Default Constructor
+	//The instance variables dMonth,dDay and dYear are set to the dafault variable
+	//Postcondition : Month = 1 && Day = 1 && Year = 1900
+	public Date() {
+		dMonth = 1;
+		dDay = 1;
+		dYear = 1900;
+	}
+
+	//Constructor to set the date
+	public Date(int month,int day,int year) {
+		dMonth = month;
+		dDay = day;
+		dYear = year;
+	}
+
+	//Method to set the date
+	public void setDate(int month,int day,int year) {
+		dMonth = month;
+		dDay = day;
+		dYear = year;
+	}
+
+	//Method to return the month
+	public int getMonth() {
+		return dMonth;
+	}
+
+	//Method to return the day
+	public int getDay() {
+		return dDay;
+	}
+
+	//Method to return the year
+	public int getYear() {
+		return dYear;
+	}
+	//Method to return the date in the FOrm mm-dd-yyyy
+	public String toString() {
+		return getMonth()+"-"+getDay()+"-"+getYear();
+	}
+
+}
+
+
+
+public class Person {
+
+	private String firstName;
+	private String lastName;
+
+	public Person() {
+		firstName = "";
+		lastName = "";
+	}
+
+	public Person(String first,String last) {
+		setName(first,last);
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public String toString() {
+		return firstName+" "+lastName;
+	}
+
+	//Method to set firstName and lastName with parameter
+	public void setName(String first,String last) {
+		firstName = first;
+		lastName = last;
+	}
+}
+
+
+/*Composition Concept*/
+public class PersonalInfo {
+
+	private Person name;
+	private Date bDay;
+	private int personID;
+
+	public PersonalInfo() {
+		name = new Person();
+		bDay = new Date();
+		personID = 0;
+	}
+
+	public PersonalInfo(String first, String last, int month, int day, int year, int ID) {
+		name = new Person(first, last);
+		bDay = new Date(month, day, year);
+		personID = ID;
+	}
+
+	// Method to set personal information
+	public void setPersonalInfo(String first, String last, int month, int day, int year, int ID) {
+		name.setName(first, last);
+		bDay.setDate(month, day, year);
+		personID = ID;
+	}
+
+	// Method to return the personal information
+	public String toString() {
+		return "Name : " + name.toString() + "\n" + 
+	"Date of birth : " + bDay.toString() + "\n" + 
+	"Personal ID : " + personID;
+	}
+
+}
+
+
+public class TestProgComposition {
+
+	public static void main(String[] args) {
+
+		PersonalInfo newStudent = new PersonalInfo("William","Jordan",8,24,1963,555238911);
+		System.out.println(newStudent);
+
+	}
+
+}
+
+------------------------------------------------------------------------------------------
+
+
+
+
+------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------
+
+
+import javax.swing.*;
+
+public class BookDemo2 {
+
+	public static void main(String[] args) {
+		String Aname = JOptionPane.showInputDialog("Input author name : ");
+		String Aemail = JOptionPane.showInputDialog("Input author e-mail : ");
+		String Btitle = JOptionPane.showInputDialog("Input book title : ");
+		int page = Integer.parseInt(JOptionPane.showInputDialog("Input book page : "));
+		int result = JOptionPane.showConfirmDialog(null, "Is the page correct ?", "Confirm", JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE);
+		if (result == JOptionPane.YES_OPTION) {
+			Book book = new Book(Btitle, new Author(Aname, Aemail), page);
+			JOptionPane.showMessageDialog(null,"Book Title : " + book.getTitle() + 
+					"\nAuthor name : " + book.getAuthor().getName() + 
+					"\nAuthor e-mail : " + book.getAuthor().getEmail());
+		} else if (result == JOptionPane.NO_OPTION) {
+			page = Integer.parseInt(JOptionPane.showInputDialog("Input book page : "));
+			Book book = new Book(Btitle, new Author(Aname, Aemail), page);
+			JOptionPane.showMessageDialog(null,"Book Title : " + book.getTitle() + 
+					"\nAuthor name : " + book.getAuthor().getName() + 
+					"\nAuthor e-mail : " + book.getAuthor().getEmail());
+		}
+	}
+
+}
+
+------------------------------------------------------------------------------------------
+
+public class Customer {
+
+	private int id;
+	private String name;
+	private int discount;
+
+	public Customer(int id,String name,int discount) {
+		this.id = id;
+		this.name = name;
+		this.discount = discount;
+	}
+
+	public int getID() {
+		return this.id;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public int getDiscount() {
+		return this.discount;
+	}
+
+	public void setDiscount(int discount) {
+		this.discount = discount;
+	}
+
+	public String toString() {
+		return name+"("+id+")"+"("+discount+"%)";
+	}
+
+}
+
+
+
+
+
+
+public class Invoice {
+
+	private int id;
+	private Customer customer;
+	private double amount;
+
+	public Invoice(int id,Customer customer,double amount) {
+		this.id = id;
+		this.customer = customer;
+		this.amount = amount;
+	}
+
+	public int getID() {
+		return id;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
+
+	public int getCustomerID() {
+		return customer.getID();
+	}
+
+	public String getCustomerName() {
+		return customer.getName();
+	}
+
+	public int getCustomerDiscount() {
+		return customer.getDiscount();
+	}
+
+	public double getAmountAfterDiscount() {
+		return amount-(amount*customer.getDiscount()/100);
+	}
+
+	public String toString() {
+		return "Invoice[id="+id+","+"Customer="+customer.toString()+",amount="+getAmountAfterDiscount()+"]";
+	}
+
+}
+
+
+public class TestCustomer {
+
+	public static void main(String[] args) {
+		System.out.println("###Test Customer class###");
+		Customer c1 = new Customer(1088, "Conan Edogawa", 10);
+		// Customer's toString()
+		System.out.println(c1);
+		// set customer's discount is 5
+		c1.setDiscount(5);
+		// Customer's toString()
+		System.out.println(c1);
+		Line();
+		// show customer's id
+		System.out.println("id is       : " + c1.getID());
+		// show customer's name
+		System.out.println("name is     : " + c1.getName());
+		// show customer's discount
+		System.out.println("discount is : " + c1.getDiscount());
+		Line();
+		System.out.println("###Test Invoice class###");
+		Invoice inv1 = new Invoice(101, c1, 12000.00);
+		// Invoice's toString()
+		System.out.println(inv1);
+		// set invoice's amount is 10000
+		inv1.setAmount(10000);
+		// Invoice's toString()
+		System.out.println(inv1);
+		Line();
+		// show invoice's id
+		System.out.println("id is       : " + inv1.getID());
+		// Customer's toString() by instance inv1
+		System.out.println("customer is : " + inv1.getCustomer().toString());
+		// show invoice's amount
+		System.out.println("amount is   : " + inv1.getAmount());
+		Line();
+		// show customer's id by instance inv1
+		System.out.println("customers's id is : " + inv1.getCustomerID());
+		// show customer's name by instance inv1
+		System.out.println("customers's id is : " + inv1.getCustomer().toString());
+		// show customer's discount by instance inv1
+		System.out.println("customers's id is : " + inv1.getCustomer().getDiscount());
+		// show invoice's amount after discount(format as output)
+		System.out.printf("customers's id is : %.2f", inv1.getAmountAfterDiscount());
+	} // end of main method()
+
+	public static void Line() {
+		System.out.println("******************************************************");
+	}
+
+}
+
+------------------------------------------------------------------------------------------
+
+
+
+
