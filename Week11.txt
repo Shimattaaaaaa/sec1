@@ -1,0 +1,454 @@
+--------------------------------------------------------------------------------------------------------------------------------------------
+Example 1 
+Class Point2D and Point3D TestPointD
+
+
+public class Point2D {
+	private float x = 0.0f;
+	private float y = 0.0f;
+	
+	public Point2D () {
+		this.x = 0;
+		this.y = 0;
+	}
+	public Point2D (float x,float y) {
+		this.x = x;
+		this.y = y;
+	}
+	public float getX () {
+		return x;
+	}
+	public void setX (float x) {
+		this.x = x;
+	}
+	public float getY () {
+		return y;
+	}
+	public void setY (float y) {
+		this.y = y;
+	}
+	public void setXY(float x,float y) {
+		this.x = x;
+		this.y = y;
+	}
+	
+	public float[] getXY () {
+		float[] results = new float[2];
+		results[0] = this.x;
+		results[1] = this.y;
+		return results;
+	}
+	
+	
+	public String toString () {
+		return "(" + getX() + "," + getY() + ")";
+	}
+	
+	
+	
+}
+
+
+
+
+
+
+
+/*The Point dD class model a 3D point at (x,y,z)
+ *which is a subclass of Point2D
+ *
+ */
+public class Point3D extends Point2D{
+	private float z;
+	
+	
+	public Point3D() {
+		super(); // call instance variable from superclass x=y=0
+		this.z=0;
+	}
+	
+	public Point3D (float x,float y,float z) {
+		super(x,y);
+		this.z = z;
+		
+	}
+	public float getZ() {
+		return z;
+	}
+	public void setZ(int z) {
+		this.z = z;
+	}
+	public void setXYZ (float x ,float y ,float z) {
+		super.setX(x);
+		super.setY(y);
+		this.z = z;
+	}
+	
+	public float [] getXYZ() {
+		float[] results = new float[3];
+		results[0] = super.getX();
+		results[1] = super.getY();
+		results[2] = this.z;
+		return results;
+	}
+	
+	/**returns a string in the form of "(x,y)and z)"*/
+	@Override
+	public String toString() {
+		return super.toString() + " ,and" + getZ() + ")";
+	}
+	
+	
+	
+	
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+public class TestPointD {
+
+	public static void main(String[] args) {
+		Point2D p1 = new Point2D(); // default constructor
+		System.out.println("Default x,y of point2D = "+p1);
+		p1.setXY(10,11);
+		System.out.println("x,y of point2D = "+p1.getXY()[0]);
+		System.out.println("x of point2D is : "+p1.getXY()[1]);
+		
+		Point3D p2 = new Point3D(); 
+		System.out.println("Default x,y and z of Point3D = "+ p2);
+		p2.setXYZ(10,12,7);
+		
+		System.out.println("x of Point3D is: "+p2.getXYZ()[0]);
+		System.out.println("y of Point3D is: "+p2.getXYZ()[1]);
+		System.out.println("z of Point3D is: "+p2.getXYZ()[2]);
+	}
+
+}
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+Example 2 
+
+
+
+public class Product {
+	private int unit;
+	
+	public void setUnit (int unit) {
+		this.unit = unit;
+	}
+	public int getUnit () {
+		return unit;
+	}
+	public int getTotalPrice () {
+		return this.unit * 100;
+	}
+	public String toString() {
+		return "You buy " + getUnit() + "Units (" + getTotalPrice() + ")."; 
+	}
+}
+
+
+
+
+import javax.swing.JOptionPane;
+
+public class Shop100Baht {
+
+	public static void main(String[] args) {
+		Product sold = new Product();
+		
+		int button = JOptionPane.showConfirmDialog(null,"Pattanakarn?");
+		if(button == 0) {
+			sold = new PattanakarnBranch();
+		}
+		
+		sold.setUnit(Integer.parseInt(JOptionPane.showInputDialog("Input the number of product")));
+		
+		JOptionPane.showMessageDialog(null,sold);
+	} 
+	
+
+}
+
+
+
+
+
+
+public class PattanakarnBranch extends Product{
+	private int payUnit() {
+		return super.getUnit() / 2;
+	}
+	
+	private int freeUnit () {
+		return super.getUnit() - this.payUnit();
+	}
+	
+	@Override
+	public int getTotalPrice () {
+		return this.payUnit() * 100;
+	}
+	
+	@Override
+	public String toString() {
+		return "You buy " + payUnit() + "units,get free " + freeUnit() + "units (" + getTotalPrice() + ")";
+		
+	}
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+Practice 1 || exercise 1
+
+public class Director {
+	private String name;
+	private String email;
+	private char gender;
+
+	public Director(String name, String email, char gender) {
+		this.name = name;
+		this.email = email;
+		this.gender = gender;
+	}
+
+	public Director(String name, String email) {
+		this.name = name;
+		this.email = email;
+		this.gender = '0';
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public String getEmail() {
+		return this.email;
+	}
+
+	public String getGenderName() {
+		if (gender == 'm' || gender == 'M')
+			return "Male";
+		else if (gender == 'f' || gender == 'F')
+			return "Female";
+		else
+			return null;
+	}
+
+	public String toString() {
+		return getName() + " (" + getEmail() + ";" + getGenderName() + ")";
+	}
+
+}
+
+
+
+
+
+
+
+public class Movie {
+
+	private String id;
+	private String name;
+	private Director director; // Composition Concept
+
+	public Movie(String id, String name, Director director) {
+		this.id = id;
+		this.name = name;
+		this.director = director;
+	}
+
+	public Movie() {
+	}
+
+	public String getId() {
+		return this.id;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public Director getDirector() {
+		return this.director;
+	}
+
+	public void setDirector(Director director) {
+		this.director = director;
+	}
+
+	public String toString() {
+		return getId() + " " + getName() + " direct by " + getDirector();
+	}
+
+}
+
+
+
+
+
+
+import java.util.Scanner;
+
+public class MovieDemo {
+
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+
+		System.out.print("Input movie id   : ");
+		String Mid = scan.nextLine();
+		System.out.print("Input movie name : ");
+		String Mname = scan.nextLine();
+
+		System.out.println();
+		System.out.print("Input director name    : ");
+		String Dname = scan.nextLine();
+		System.out.print("Input director e-mail  : ");
+		String Demail = scan.nextLine();
+		System.out.print("Input director gender  : ");
+		char Dgender = scan.next().charAt(0);
+		while (true) {
+			if((Dgender=='m'||Dgender=='M')||(Dgender=='f'||Dgender=='F')) break;
+			System.out.print("Input director gender, again : ");
+			Dgender = scan.next().charAt(0);
+		}
+
+		System.out.println();
+		System.out.print("Input movie theater no.  : ");
+		int Mtheater = scan.nextInt();
+		while (Mtheater < 1 || Mtheater > 15) {
+			System.out.print("Please input 1 - 15 only : ");
+			Mtheater = scan.nextInt();
+		}
+
+		System.out.println();
+		Theater theater = new Theater(Mid,Mname,new Director(Dname,Demail,Dgender),Mtheater);
+		System.out.println(theater);
+	}
+
+}
+
+/*
+Input movie id   : DTM-002
+Input movie name : The New Village
+Input director name    : Sara Karen
+Input director e-mail  : k.sara@gmail.com
+Input director gender  : a
+Input director gender, again : 1
+Input director gender, again : f
+Input movie theater no.  : 0
+Please input 1 - 15 only : 16
+Please input 1 - 15 only : -2
+Please input 1 - 15 only : 12
+*/
+
+
+
+
+
+
+
+import javax.swing.JOptionPane;
+
+public class TestInformation {
+
+	public static void main(String[] args) {
+
+		String Dname = JOptionPane.showInputDialog("Input Director name : ");
+		String Demail = JOptionPane.showInputDialog("Input Director e-mail : ");
+		String Mtitle = JOptionPane.showInputDialog("Input Movie title : ");
+		int confirmE = JOptionPane.showConfirmDialog(null, 
+				"Do you confirm your e-mail ?", "Confirm", 
+				JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+		if (confirmE == 1) {
+			Demail = JOptionPane.showInputDialog("Input Director e-mail : ");
+			Director author = new Director(Dname,Demail);
+		}
+		Director author = new Director(Dname,Demail);
+		JOptionPane.showMessageDialog(null,"Movie Title : " + Mtitle + 
+				"\nDirector name : " + author.getName() + 
+				"\nDirector e-mail : " + author.getEmail());
+
+	}
+}
+
+/* 
+ * 1) Sara Haren / sara@gmail.com / The New Village
+ * 2) Sara Haren / sara@gmail.com / The New Village / Change email --> h.sara@hotmail.com
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public class Theater extends Movie{
+
+	private int theaterNo;
+
+	public Theater(String id,String name,Director director,int theaterNo) {
+		super(id,name,director);
+		this.theaterNo = theaterNo;
+	}
+
+	public Theater() {
+	}
+
+	public String getTheaterName() {
+		if (this.theaterNo>=1&&this.theaterNo<=11) return "Basic Theater";
+		else if(this.theaterNo>=12&&this.theaterNo<=14) return "Sweet Theater";
+		else if(this.theaterNo>=15) return "Premium Theater";
+		else return null;
+	}
+
+	public String toString() {
+		return getTheaterName()+" : "+super.toString();
+	}
+}
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
