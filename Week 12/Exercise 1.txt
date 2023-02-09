@@ -1,0 +1,179 @@
+1-4
+
+public abstract class Shape {
+	private String  color;
+	
+	public Shape () {
+		this.color = null;
+		//this(null);
+	}
+	public Shape (String color) {
+		this.color = color;
+	}
+	//abstract method
+	public abstract double getArea ();
+	
+	@Override
+	public String toString () {
+		return "Color = " + this.color;
+	}
+}
+
+
+
+
+
+public class Circle extends Shape{
+	private double radius;
+	
+	public Circle (double radius ,String color) {
+		super(color);
+		this.radius = radius;
+		
+	}
+	public double getRadius () {
+		return radius;
+	}
+	@Override
+	public double getArea () {
+		return Math.PI * (radius * radius);
+	}
+	@Override
+	public String toString () {
+		return "Circle[radius=" + radius + "]";
+	}
+}
+
+
+
+
+
+
+public  class Cylinder extends Circle{
+	private double height;
+	
+	
+	public Cylinder (double radius,double height) {
+		super(radius,null);
+		this.height = height;
+		
+	}
+	public double getHeight () {
+		return this.height;
+	}
+	public double getVolume (){
+		return getRadius()*this.height;
+	}
+	public double getArea () {
+		return (2*3.14)*(height + getRadius() );
+	}
+	public String toString () {
+		return "height = [" + this.height + "], [" + super.toString()+"]";
+	}
+}
+
+
+
+
+
+
+import java.util.Scanner;
+
+public class ShapeDemo1 {
+
+	
+	static Scanner scan = new Scanner (System.in);
+	public static void main(String[] args) {
+		double radius = scan.nextDouble();
+		double height = scan.nextDouble();
+		
+		Circle circle = new Circle(radius, null);
+		System.out.println(circle);
+		System.out.println("Circle[area="+circle.getArea()+"]\n");
+		
+		Cylinder cylinder = new Cylinder (radius,height);
+		
+		System.out.println(cylinder);
+		System.out.println(cylinder.getArea());
+		System.out.println(cylinder.getVolume());
+	}
+
+}
+//System.out.println();
+
+
+
+
+
+
+
+
+//*motto benkyou shinakujya*/
+import java.util.Scanner;
+
+public class ShapeDemo2 {
+
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		Cylinder[] cylinder = new Cylinder[5];
+
+		for (int i = 0; i < cylinder.length; i++) {
+
+			System.out.print("Input radius " + (i+1) + ": ");
+			double radius = scan.nextDouble();
+			System.out.print("Input height " + (i+1) + ": ");
+			double height = scan.nextDouble();
+
+			cylinder[i] = new Cylinder(radius , height);
+			System.out.println();
+
+		}
+
+		int count = 1;
+
+		for (Cylinder it : cylinder) {
+			System.out.println("Cylinder " + count + ", volume=" + it.getVolume());
+			count++;
+		}
+	}
+
+}
+
+
+
+
+
+
+
+
+import java.util.Scanner;
+
+import javax.swing.JOptionPane;
+
+public class ShapeDemo3 {
+
+	public static void main(String[] args) {
+
+		Scanner scan = new Scanner(System.in);
+		Cylinder[] cylinder = new Cylinder[5];
+
+		for (int i = 0; i < cylinder.length; i++) {
+
+			double radius = Double.parseDouble(JOptionPane.showInputDialog("Input radius " + (i+1) + ":"));
+			double height = Double.parseDouble(JOptionPane.showInputDialog("Input height " + (i+1) + ":"));
+
+			cylinder[i] = new Cylinder(radius , height);
+		}
+
+		int count = 1;
+		String text = "";
+
+		for (Cylinder it : cylinder) {
+			text = text + "Cylinder " + count + ", volume=" + it.getVolume() + "\n";
+			count++;
+		}
+
+		JOptionPane.showMessageDialog(null, text);
+	}
+
+}//^_^
